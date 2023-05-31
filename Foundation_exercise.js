@@ -322,6 +322,76 @@
 
 // If len is smaller than 3, and text does not fit len, summarize returns an empty string "".
 
+// function summarize(text, tail, len) {
+//   if (len <= tail) {
+//     return ""; // If len is smaller than 3, and text does not fit len, summarize returns an empty string "".
+//   }
+
+//   if (text.length === len) {
+//     return text;
+//   }
+
+//   let result = "";
+//   if (text.length > len) {
+//     for (let i = 0; i < len; i++) {
+//       result = result + text[i];
+//       //console.log(result); // check
+//     }
+//   }
+
+//   let ansCutBlank = "";
+//   for (let j = result.length - 1; j < len; j--) {
+//     if (result[j] === " ") {
+//       ansCutBlank = result.slice(0, j);
+//       //console.log(ansCutBlank, ansCutBlank.length); // check
+//       break;
+//     }
+//   }
+
+//   ansCutBlank = ansCutBlank + tail;
+//   //console.log(ansCutBlank, ansCutBlank.length);
+
+//   let ansCutBlankTwo = "";
+//   if (ansCutBlank.length <= len) {
+//     return ansCutBlank;
+//   } else {
+//     for (let k = ansCutBlank.length - tail.length - 1; k > 0; k--) {
+//       if (ansCutBlank[k] === " ") {
+//         ansCutBlankTwo = ansCutBlank.slice(0, k);
+//         break;
+//       }
+//     }
+//   }
+//   ansCutBlankTwo = ansCutBlankTwo + tail;
+//   return ansCutBlankTwo;
+// }
+
+const summarize = (a, tail, len) => {
+  if (len < tail.length) return "";
+  return (
+    a.split(" ").reduce((acc, word) => {
+      const currentLength = acc.length + tail.length + 1; // "abcde" + tail
+      if (currentLength < len) {
+        return acc + " " + word;
+      } else {
+        return acc;
+      }
+    }, "") + tail
+  );
+};
+
+const articleCleverse =
+  "I am from Cleverse Academy! Today, I’m here to teach you some JavaScript programming";
+
+console.log(summarize(articleCleverse, " ...", 30)); // "I am from Cleverse Academy! ..."
+
+const articleFoo = "Good morning ladies and gentlemen";
+
+console.log(summarize(articleFoo, " ...", 2)); // ""
+console.log(summarize(articleFoo, " ...", 10)); // "Good ..."
+summarize(articleFoo, " ...", 20); // "Good morning ..."
+summarize(articleFoo, " ...", 25); // "Good morning ladies ..."
+
 // 12. Write a function filterLt(n, arr)
 
 // filterLt(n, arr) takes in an a number n and an array of numbers arr, and returns a new array containing all elements of arr that is lesser than (lt) n.
@@ -368,17 +438,17 @@
 
 // The interface (function signature) to this logic should be as simple as compoundedReturn(amount, interest, n) where amount is the amount of fund invested in the 1st period, interest is an interest percentage per period, and n is the number of periods of the investment.
 
-const compoundedReturn = (amount, interest, n) => {
-  for (i = 1; i <= n; i++) {
-    amount = amount + (amount * interest) / 100;
-  }
+// const compoundedReturn = (amount, interest, n) => {
+//   for (i = 1; i <= n; i++) {
+//     amount = amount + (amount * interest) / 100;
+//   }
 
-  console.log(amount);
-};
+//   console.log(amount);
+// };
 
-compoundedReturn(100, 1, 1); // 101
-compoundedReturn(100, 10, 1); // 110
-compoundedReturn(100, 10, 2); // 121
+// compoundedReturn(100, 1, 1); // 101
+// compoundedReturn(100, 10, 1); // 110
+// compoundedReturn(100, 10, 2); // 121
 
 // 16. Write a function mean(arr)
 
@@ -493,6 +563,20 @@ compoundedReturn(100, 10, 2); // 121
 // mid(["john"]); // "john"
 // mid(["foo", "bar", "baz"]); // ["bar"]
 // mid([1, 2, 3, 4]); // [2, 3]
+
+// 20. Write a function initArr(val, len)
+
+// const initArr = (val, len) => {
+//   result = [];
+//   for (i = 0; i < len; i++) {
+//     result.push(val);
+//   }
+//   return result;
+// };
+
+// console.log(initArr(0, 5)); // returns an array of length len with all members initialized to val.
+
+// initArr(0, 5); // [0, 0, 0, 0, 0]
 
 // 21. Write a function flatMap(arr)
 
@@ -644,15 +728,21 @@ compoundedReturn(100, 10, 2); // 121
 
 // const transpose = (bits, w, h) => {
 //   idx = 0;
-//   for (j = 1; j <= h; j++) {
+//   let result = [];
+
+//   for (j = 0; j < h; j++) {
 //     let pixel = [];
-//     for (let i = 1; i <= w; i++) {
+//     for (let i = 0; i < w; i++) {
 //       pixel.push(bits[idx]);
 //       idx = idx + 1;
 //     }
-//     console.log(pixel);
+//     result.push(pixel);
 //   }
+
+//   return result;
 // };
+
+// console.log(transpose(imageBytes, 8, 2));
 
 // transpose(imageBytes, 8, 2);
 // transpose(imageBytes, 2, 8);
